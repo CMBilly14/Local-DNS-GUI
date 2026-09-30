@@ -27,7 +27,9 @@ npm run test:gui -- --packaged
 
 The GUI test starts local UDP and TCP fixtures and uses an isolated profile under `test-output/`. It does not alter normal application history. It covers answer/authority/additional tabs, recursive labeling, negative/empty answers, UDP-to-TCP fallback, TCP-only queries, safe TXT rendering, both export formats, validation, timeouts, cancellation, history search and recall, restart persistence, clearing and minimum window size. Save dialogs are stubbed to a test destination: native file-picker interaction still deserves a manual check.
 
-The source test resolves Electron for the current OS. Packaged tests accept `DNS_LOCAL_EXECUTABLE` to identify a different app binary (for example a macOS `mac-arm64` output). Linux headless CI can run `xvfb-run -a npm run test:gui` after installing Electron's system dependencies. Do not disable Electron's sandbox merely to make tests pass.
+The source test resolves Electron for the current OS. Packaged tests accept `DNS_LOCAL_EXECUTABLE` to identify a different app binary (for example a macOS `mac-arm64` output). The repository CI runs the GUI regression on Windows and macOS directly and on Linux through `xvfb-run`. Do not disable Electron's sandbox merely to make tests pass.
+
+Tagged pushes matching `v*` run the same validation on hosted Windows, Linux, and macOS machines, build the native packages, generate `SHA256SUMS.txt`, and create a prerelease containing those artifacts. The workflow does not sign or notarize the packages.
 
 Tests provide repeatable evidence, not proof across all VPNs, DNS servers, displays or Linux distributions. OS integration, fresh-user installation, accessibility, and target-platform packaging should also be checked before public release.
 

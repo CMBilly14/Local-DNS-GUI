@@ -4,7 +4,21 @@ A desktop DNS inspector that sends queries from your own machine. Ask an interna
 
 ![DNS Local querying a local test nameserver](docs/desktop.png)
 
-Version 0.1.0 is an unsigned Windows x64 **preview**. See [release notes](docs/RELEASE_NOTES_0.1.0.md) and the [upload checklist](docs/UPLOAD_CHECKLIST.md).
+Version 0.1.0 is an unsigned Windows x64 **preview**. See the [release notes](docs/RELEASE_NOTES_0.1.0.md).
+
+## Interface tour
+
+### SPF-only results
+
+Selecting SPF performs the required TXT query while showing only records whose policy begins with `v=spf1`. Unrelated verification TXT records remain available in the raw packet but do not appear as SPF answers.
+
+![DNS Local showing only the SPF policy from a TXT response](docs/spf-filtering.png)
+
+### Protocol controls
+
+The advanced controls expose transport, timeout, retry, EDNS, and DNSSEC-request flags without changing the default workflow.
+
+![DNS Local protocol and query controls](docs/protocol-controls.png)
 
 ## Run
 

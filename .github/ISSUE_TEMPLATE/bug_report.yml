@@ -1,0 +1,71 @@
+name: Bug report
+description: Report incorrect DNS results, application errors, or interface problems.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve DNS Local. Do not include private domains, credentials, internal IP addresses, or other sensitive information. Use private vulnerability reporting from the Security tab when a report may expose protected information or cross a security boundary.
+  - type: input
+    id: version
+    attributes:
+      label: DNS Local version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system
+      placeholder: Windows 11 24H2, Ubuntu 26.04, macOS 15, etc.
+    validations:
+      required: true
+  - type: dropdown
+    id: query-mode
+    attributes:
+      label: Query mode
+      options:
+        - System resolver
+        - Authoritative servers
+        - Delegation trace
+        - Authority vs. public
+        - Public resolver
+        - Custom nameserver
+        - Not applicable
+    validations:
+      required: true
+  - type: input
+    id: record-type
+    attributes:
+      label: Record type
+      placeholder: A, MX, SPF, TXT, etc.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use a public test domain when possible and list the exact controls selected.
+      placeholder: |
+        1. Enter example.com.
+        2. Select SPF and System resolver.
+        3. Run the lookup.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add sanitized logs or screenshots if they help reproduce the problem.

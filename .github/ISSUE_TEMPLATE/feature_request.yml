@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest an improvement to DNS Local.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for suggesting an improvement. Describe the DNS workflow or user problem first so the proposal can be evaluated against the local-only privacy model.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or workflow
+      description: What are you trying to accomplish, and what currently makes it difficult?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy expectations
+      options:
+        - label: This request can preserve the application's no-account, no-telemetry design.
+          required: true

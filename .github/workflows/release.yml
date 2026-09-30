@@ -1,0 +1,67 @@
+name: Tagged release packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: windows-x64
+            paths: release/*.exe
+          - os: ubuntu-latest
+            artifact: linux-x64
+            paths: release/*.AppImage
+          - os: macos-latest
+            artifact: macos
+            paths: |
+              release/*.dmg
+              release/*.zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - if: runner.os == 'Linux'
+        run: xvfb-run -a npm run test:gui
+      - if: runner.os != 'Linux'
+        run: npm run test:gui
+      - run: npm run dist
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dns-local-${{ matrix.artifact }}
+          path: ${{ matrix.paths }}
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Create checksums
+        working-directory: artifacts
+        run: find . -maxdepth 1 -type f -printf '%f\0' | sort -z | xargs -0 sha256sum > SHA256SUMS.txt
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" artifacts/* --repo "$GITHUB_REPOSITORY" --title "DNS Local ${TAG#v}" --generate-notes --prerelease --verify-tag

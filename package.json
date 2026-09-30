@@ -17,6 +17,7 @@
     "lint": "eslint src test scripts",
     "test:desktop": "node scripts/desktop-smoke.mjs",
     "test:gui": "node scripts/desktop-regression.mjs",
+    "screenshots": "node scripts/capture-readme-screenshots.mjs",
     "dist:windows": "npm run build:core && electron-builder --win portable --x64 --publish never",
     "dist:linux": "npm run build:core && electron-builder --linux AppImage --x64 --publish never",
     "dist:mac": "npm run build:core && electron-builder --mac dmg zip --arm64 --x64 --publish never",
