@@ -63,7 +63,8 @@ async function query(name, type = 'A') {
 try {
   await launch();
   await page.selectOption('#mode', 'custom'); await page.fill('#server', '127.0.0.1'); await page.fill('#port', String(tcp.address().port));
-  await page.locator('summary').click(); await page.locator('[name="timeoutMs"]').fill('200'); await page.locator('[name="retries"]').fill('0');
+  await page.locator('details').evaluate(node => { node.open = true; });
+  await page.locator('[name="timeoutMs"]').fill('200'); await page.locator('[name="retries"]').fill('0');
   await query('success.example');
   assert.match(await page.locator('#content').innerText(), /192\.0\.2\.42/);
   await page.click('[data-tab="authorities"]'); assert.match(await page.locator('#content').innerText(), /ns.example/);
