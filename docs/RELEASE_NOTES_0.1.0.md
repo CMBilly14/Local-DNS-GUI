@@ -4,7 +4,7 @@ Initial Windows x64 preview of the local desktop DNS inspector.
 
 ## Download and run
 
-Download `DNS Local 0.1.0.exe` from this release and open it. Electron and production dependencies are bundled; Node.js and npm are not required. No installer is required.
+Download `DNS.Local.0.1.0.exe` from this release and open it. Electron and production dependencies are bundled; Node.js and npm are not required. No installer is required.
 
 This release is intentionally unsigned. Windows may show an Unknown publisher or Windows protected your PC warning, and managed devices may block unsigned applications. Follow your device administrator's policies.
 
@@ -27,7 +27,7 @@ macOS and Linux packages are not included or verified. Direct DNS requires acces
 `SHA256SUMS.txt` contains the SHA-256 checksum of the executable. On Windows, run:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 -LiteralPath '.\DNS Local 0.1.0.exe'
+Get-FileHash -Algorithm SHA256 -LiteralPath '.\DNS.Local.0.1.0.exe'
 ```
 
 Compare the hash with the checksum file. A checksum detects file differences; it is not a publisher signature.

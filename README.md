@@ -8,7 +8,7 @@ Version 0.1.0 is an unsigned Windows x64 **preview**. See [release notes](docs/R
 
 ## Run
 
-Download `DNS Local 0.1.0.exe` and `SHA256SUMS.txt` from the GitHub Releases page, verify the checksum, and run the executable. No Node.js installation is required for the packaged build. The Windows x64 release is intentionally unsigned for now. Windows may display an "Unknown publisher" or "Windows protected your PC" warning, and managed devices may block it. Signing is not required to publish the source repository. See [distribution notes](docs/DISTRIBUTION.md). macOS and Linux packages can be built on their native platforms using the release workflow.
+Download `DNS.Local.0.1.0.exe` and `SHA256SUMS.txt` from the GitHub Releases page, verify the checksum, and run the executable. No Node.js installation is required for the packaged build. The Windows x64 release is intentionally unsigned for now. Windows may display an "Unknown publisher" or "Windows protected your PC" warning, and managed devices may block it. Signing is not required to publish the source repository. See [distribution notes](docs/DISTRIBUTION.md). macOS and Linux packages can be built on their native platforms using the release workflow.
 
 To run from source, install Node.js 22.12 or later and open a terminal in the repository root:
 
