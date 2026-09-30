@@ -1,0 +1,72 @@
+{
+  "name": "dns-local",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Direct DNS queries and delegation traces from your desktop",
+  "author": "DNS Local contributors",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/main.cjs",
+  "scripts": {
+    "build:core": "tsc -p packages/dns-core/tsconfig.json",
+    "prestart": "npm run build:core",
+    "start": "electron .",
+    "pretest": "npm run build:core",
+    "test": "node --test test/*.test.mjs packages/dns-core/test/*.test.mjs",
+    "typecheck": "npm run build:core && tsc --noEmit",
+    "lint": "eslint src test scripts",
+    "test:desktop": "node scripts/desktop-smoke.mjs",
+    "test:gui": "node scripts/desktop-regression.mjs",
+    "dist:windows": "npm run build:core && electron-builder --win portable --x64 --publish never",
+    "dist:linux": "npm run build:core && electron-builder --linux AppImage --x64 --publish never",
+    "dist:mac": "npm run build:core && electron-builder --mac dmg zip --arm64 --x64 --publish never",
+    "predist": "npm run build:core",
+    "dist": "electron-builder --publish never"
+  },
+  "dependencies": {
+    "@dns-search/core": "file:packages/dns-core",
+    "dns-packet": "5.6.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "22.19.19",
+    "electron": "^44.4.3",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.39.0",
+    "globals": "^16.5.0",
+    "playwright-core": "^1.62.1",
+    "typescript": "5.9.3"
+  },
+  "build": {
+    "appId": "org.dns-local.desktop",
+    "productName": "DNS Local",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "LICENSE",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": false
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Network"
+    }
+  }
+}

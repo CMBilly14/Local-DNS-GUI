@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>DNS Local</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="rail"><div class="brand"><span class="mark">D/</span><span>DNS Local<small>DESKTOP WORKSPACE</small></span></div>
+    <div class="rail-label">TOOLS</div><div class="active-tool">◎ <span>DNS inspector</span><span class="small-tag">01</span></div>
+    <section class="history"><div class="history-heading"><h2>Recent queries</h2><button id="clear" class="quiet">Clear</button></div><label class="sr-only" for="history-search">Search history</label><input id="history-search" placeholder="Filter history…"><div id="history"></div></section>
+    <div class="privacy"><span class="dot"></span> Runs on your machine<p>Queries go directly to DNS servers.<br>No account. No telemetry.</p></div>
+  </aside>
+  <main>
+    <header><div><div class="eyebrow">NETWORK TOOLS / DNS</div><h1>Look past the cache.</h1><p>Inspect records, follow delegations, and ask any nameserver.</p></div><span class="local-badge"><span class="dot"></span> LOCAL ENGINE</span></header>
+    <form id="query-form" class="panel query-panel">
+      <div class="query-row"><div class="grow"><label for="name">DOMAIN OR IP ADDRESS</label><input id="name" name="name" placeholder="example.com" value="example.com" required autofocus autocomplete="off" spellcheck="false"></div><div><label for="type">RECORD</label><select id="type" name="type"><option>A</option><option>AAAA</option><option>CNAME</option><option>MX</option><option>TXT</option><option>NS</option><option>SOA</option><option>PTR</option><option>CAA</option><option>SRV</option><option>DS</option><option>DNSKEY</option><option>RRSIG</option><option>DMARC</option><option>DKIM</option><option>SPF</option></select></div><button class="primary" id="run" type="submit">Run lookup <span>↵</span></button><button type="button" id="cancel" hidden>Cancel</button></div>
+      <div class="server-row"><label for="mode">Query from</label><select id="mode" name="mode"><option value="system">System resolver</option><option value="authoritative">Authoritative servers</option><option value="trace">Delegation trace</option><option value="compare">Authority vs. public</option><option value="public">Public resolver</option><option value="custom">Custom nameserver</option></select><select id="resolver" name="resolver" aria-label="Public resolver" hidden><option value="cloudflare">Cloudflare · 1.1.1.1</option><option value="google">Google · 8.8.8.8</option><option value="quad9">Quad9 · 9.9.9.9</option><option value="opendns">OpenDNS · 208.67.222.222</option></select><input id="server" name="server" aria-label="Custom server IP" placeholder="192.168.1.1 or IPv6" value="1.1.1.1" hidden><label id="port-label" hidden>Port <input id="port" name="port" type="number" value="53" min="1" max="65535"></label></div>
+      <p class="mode-note" id="mode-note">Uses the DNS servers configured on this device, including VPN DNS where available.</p>
+      <details><summary>Protocol controls <span>Transport, flags &amp; timeouts</span></summary><div class="advanced"><label>Transport<select name="protocol"><option value="udp">UDP → TCP fallback</option><option value="tcp">TCP only</option></select></label><label>Timeout / attempt (ms)<input name="timeoutMs" type="number" min="100" max="10000" value="2500"></label><label>Retries<input name="retries" type="number" min="0" max="3" value="1"></label><label>EDNS buffer<input name="edns" type="number" min="512" max="4096" value="1232"></label><label>DKIM selector<input name="selector" placeholder="selector1" maxlength="63"></label><label class="check"><input type="checkbox" name="rd" checked> RD · request recursion</label><label class="check"><input type="checkbox" name="cd"> CD · disable checking</label><label class="check"><input type="checkbox" name="do"> DO · request DNSSEC records</label></div><p class="mode-note">Trace and authority use RD=0; comparison resolvers use RD=1. DNSSEC records and AD flags are evidence, not local chain validation.</p></details>
+    </form>
+    <div id="status" role="status" aria-live="polite">Ready when you are.</div>
+    <section id="workspace" class="panel results">
+      <div class="results-heading"><div><span class="eyebrow">RESPONSE WORKSPACE</span><h2 id="result-title">Your next answer starts here.</h2></div><div class="actions"><button id="copy" disabled>Copy dig</button><button id="export-text" disabled>Text ↓</button><button id="export-json" disabled>JSON ↓</button></div></div>
+      <div id="server-cards"></div>
+      <nav class="tabs" aria-label="Result sections"><button class="selected" data-tab="answers">Answers</button><button data-tab="authorities">Authority</button><button data-tab="additionals">Additional</button><button data-tab="trace">Trace <span id="trace-count">0</span></button><button data-tab="compare">Compare</button><button data-tab="raw">Raw packet</button></nav>
+      <div id="content"><div class="empty"><div class="orbit">◎</div><h3>One query. The full picture.</h3><p>Start with your system resolver, or query the zone’s<br>authoritative servers directly from your device.</p><div class="empty-tags"><span>UDP + TCP</span><span>IPv4 + IPv6</span><span>16 record types</span></div></div></div>
+    </section>
+    <footer><span>DNS LOCAL <span class="muted">/ 0.1.0</span></span><span>Ctrl / ⌘ + L to focus · Enter to query · Esc to cancel</span></footer>
+  </main><script src="renderer.js"></script>
+</body></html>

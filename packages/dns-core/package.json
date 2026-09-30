@@ -1,0 +1,12 @@
+{
+  "name": "@dns-search/core",
+  "version": "0.1.0",
+  "description": "Framework-free DNS engine for DNS Local",
+  "type": "module",
+  "license": "MIT",
+  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {"./*": {"types": "./dist/*.d.ts", "import": "./dist/*.js"}},
+  "scripts": {"build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit", "test": "node --test test/*.test.mjs", "prepack": "npm run build"},
+  "dependencies": {"dns-packet": "5.6.1", "ipaddr.js": "2.5.0"},
+  "devDependencies": {"typescript": "5.9.3", "@types/node": "22.19.19"}
+}
