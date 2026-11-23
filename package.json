@@ -29,14 +29,14 @@
     "dns-packet": "5.6.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.0",
-    "@types/node": "22.19.19",
-    "electron": "^44.4.3",
-    "electron-builder": "^26.0.12",
-    "eslint": "^9.39.0",
-    "globals": "^16.5.0",
-    "playwright-core": "^1.62.1",
-    "typescript": "5.9.3"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "26.6.6",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "playwright-core": "^1.65.1",
+    "typescript": "7.0.2"
   },
   "build": {
     "appId": "org.dns-local.desktop",
